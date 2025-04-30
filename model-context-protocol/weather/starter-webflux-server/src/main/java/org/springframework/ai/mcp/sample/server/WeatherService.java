@@ -17,12 +17,17 @@ package org.springframework.ai.mcp.sample.server;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.annotation.Resource;
 
 import org.springframework.ai.tool.annotation.Tool;
+import org.springframework.ai.tool.annotation.ToolParam;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
@@ -136,10 +141,37 @@ public class WeatherService {
 			.collect(Collectors.joining("\n"));
 	}
 
-	public static void main(String[] args) {
-		WeatherService client = new WeatherService();
-		System.out.println(client.getWeatherForecastByLocation(47.6062, -122.3321));
-		System.out.println(client.getAlerts("NY"));
+	@Resource
+	private MenuRepository menuRepository;
+
+	@Tool(description = "INSERT menu some food likes(potato,tomato)")
+	public String addFood(@ToolParam( description =  "food_cost_price") String food_cost_price, @ToolParam(description = "foodName") String foodName,
+						  @ToolParam(description = "foodPrice") String foodPrice, @ToolParam(description = "foodNum") String foodNum) {
+//		Alert alert = restClient.get().uri("/alerts/active/area/{state}", state).retrieve().body(Alert.class);
+		Menu menu = new Menu();
+		System.out.println(food_cost_price);
+		menu.setId(UUID.randomUUID().hashCode());
+//		System.out.println(Integer.valueOf(generateRandomId()));
+		menu.setName(foodName);
+		menu.setPrice(foodPrice);
+		menu.setStore_num(foodNum);
+		menu.setCost_price(food_cost_price);
+		System.out.println(menu);
+		menuRepository.save(menu);
+		return "ok";
+	}
+
+	private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	private static final int ID_LENGTH = 3;
+	private static final Random RANDOM = new Random();
+
+	public static String generateRandomId() {
+		StringBuilder sb = new StringBuilder(ID_LENGTH);
+		for (int i = 0; i < ID_LENGTH; i++) {
+			int index = RANDOM.nextInt(CHARACTERS.length());
+			sb.append(CHARACTERS.charAt(index));
+		}
+		return sb.toString();
 	}
 
 }
