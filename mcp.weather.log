@@ -1,4 +1,100 @@
-2025-03-17T21:20:53.178+01:00  INFO 52952 --- [main] o.s.a.m.s.server.McpServerApplication    : Starting McpServerApplication using Java 17.0.12 with PID 52952 (/Users/christiantzolov/Dev/projects/spring-ai-examples/model-context-protocol/weather/manual-webflux-server/target/classes started by christiantzolov in /Users/christiantzolov/Dev/projects/spring-ai-examples)
-2025-03-17T21:20:53.179+01:00  INFO 52952 --- [main] o.s.a.m.s.server.McpServerApplication    : No active profile set, falling back to 1 default profile: "default"
-2025-03-17T21:20:53.788+01:00  INFO 52952 --- [main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080 (http)
-2025-03-17T21:20:53.797+01:00  INFO 52952 --- [main] o.s.a.m.s.server.McpServerApplication    : Started McpServerApplication in 0.782 seconds (process running for 0.909)
+2025-04-30T14:23:46.250+08:00  INFO 76529 --- [main] o.s.a.m.s.server.McpServerApplication    : Starting McpServerApplication using Java 23.0.2 with PID 76529 (/Volumes/NewVolume/learnSpace/learnFile/java-weatherMCP/model-context-protocol/weather/manual-webflux-server/target/classes started by zhourenze in /Volumes/NewVolume/learnSpace/learnFile/java-weatherMCP)
+2025-04-30T14:23:46.257+08:00  INFO 76529 --- [main] o.s.a.m.s.server.McpServerApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T14:23:49.798+08:00  WARN 76529 --- [main] onfigReactiveWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-04-30T14:23:49.818+08:00  INFO 76529 --- [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-04-30T14:23:49.828+08:00 ERROR 76529 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-04-30T14:24:16.125+08:00  INFO 76563 --- [main] o.s.a.m.s.server.McpServerApplication    : Starting McpServerApplication using Java 23.0.2 with PID 76563 (/Volumes/NewVolume/learnSpace/learnFile/java-weatherMCP/model-context-protocol/weather/manual-webflux-server/target/classes started by zhourenze in /Volumes/NewVolume/learnSpace/learnFile/java-weatherMCP)
+2025-04-30T14:24:16.133+08:00  INFO 76563 --- [main] o.s.a.m.s.server.McpServerApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T14:24:18.785+08:00  WARN 76563 --- [main] onfigReactiveWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-04-30T14:24:18.801+08:00  INFO 76563 --- [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-04-30T14:24:18.812+08:00 ERROR 76563 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-04-30T14:24:35.766+08:00  INFO 76586 --- [main] o.s.a.m.s.server.McpServerApplication    : Starting McpServerApplication using Java 23.0.2 with PID 76586 (/Volumes/NewVolume/learnSpace/learnFile/java-weatherMCP/model-context-protocol/weather/manual-webflux-server/target/classes started by zhourenze in /Volumes/NewVolume/learnSpace/learnFile/java-weatherMCP)
+2025-04-30T14:24:35.766+08:00  INFO 76586 --- [main] o.s.a.m.s.server.McpServerApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T14:24:38.391+08:00  WARN 76586 --- [main] onfigReactiveWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-04-30T14:24:38.401+08:00  INFO 76586 --- [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-04-30T14:24:38.410+08:00 ERROR 76586 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-04-30T14:25:58.760+08:00  INFO 76616 --- [main] o.s.a.m.s.server.McpServerApplication    : Starting McpServerApplication using Java 23.0.2 with PID 76616 (/Volumes/NewVolume/learnSpace/learnFile/java-weatherMCP/model-context-protocol/weather/manual-webflux-server/target/classes started by zhourenze in /Volumes/NewVolume/learnSpace/learnFile/java-weatherMCP)
+2025-04-30T14:25:58.778+08:00  INFO 76616 --- [main] o.s.a.m.s.server.McpServerApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T14:26:01.530+08:00  WARN 76616 --- [main] onfigReactiveWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-04-30T14:26:01.545+08:00  INFO 76616 --- [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-04-30T14:26:01.559+08:00 ERROR 76616 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-04-30T14:26:23.461+08:00  INFO 76645 --- [main] o.s.a.m.s.server.McpServerApplication    : Starting McpServerApplication using Java 23.0.2 with PID 76645 (/Volumes/NewVolume/learnSpace/learnFile/java-weatherMCP/model-context-protocol/weather/manual-webflux-server/target/classes started by zhourenze in /Volumes/NewVolume/learnSpace/learnFile/java-weatherMCP)
+2025-04-30T14:26:23.475+08:00  INFO 76645 --- [main] o.s.a.m.s.server.McpServerApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-04-30T14:26:26.130+08:00  WARN 76645 --- [main] onfigReactiveWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-04-30T14:26:26.141+08:00  INFO 76645 --- [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-04-30T14:26:26.151+08:00 ERROR 76645 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
