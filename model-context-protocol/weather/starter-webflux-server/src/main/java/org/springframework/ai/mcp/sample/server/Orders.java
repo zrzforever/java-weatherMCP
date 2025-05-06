@@ -1,12 +1,15 @@
 package org.springframework.ai.mcp.sample.server;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.math.BigDecimal;
 @Entity
-public class Order {
+public class Orders {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String orderId;
     private String productName;
@@ -18,11 +21,11 @@ public class Order {
     private String contactPhone;
 
     // 无参构造方法
-    public Order() {
+    public Orders() {
     }
 
     // 全参构造方法
-    public Order(String orderId, String productName, BigDecimal unitPrice, Integer quantity, BigDecimal totalPrice, String deliveryAddress, String contactPerson, String contactPhone) {
+    public Orders(String orderId, String productName, BigDecimal unitPrice, Integer quantity, BigDecimal totalPrice, String deliveryAddress, String contactPerson, String contactPhone) {
         this.orderId = orderId;
         this.productName = productName;
         this.unitPrice = unitPrice;

@@ -167,7 +167,7 @@ public class WeatherService {
 	public String addOrderDetail(@ToolParam( description =  "orderId") String orderId, @ToolParam(description = "productName") String productName,
 						  @ToolParam(description = "unitPrice") BigDecimal unitPrice, @ToolParam(description = "quantity") String quantity, @ToolParam(description = "totalPrice") BigDecimal totalPrice, @ToolParam(description = "deliveryAddress") String deliveryAddress, @ToolParam(description = "contactPerson") String contactPerson, @ToolParam(description = "contactPhone") String contactPhone) {
 //		Alert alert = restClient.get().uri("/alerts/active/area/{state}", state).retrieve().body(Alert.class);
-		Order order = new Order();
+		Orders order = new Orders();
 		order.setOrderId(orderId);
 		order.setId(100 + (int)(Math.random() * 900));
 		order.setProductName(productName);
@@ -175,8 +175,12 @@ public class WeatherService {
 		order.setContactPerson(contactPerson);
 		order.setContactPhone(contactPhone);
 		order.setDeliveryAddress(deliveryAddress);
+		System.out.println(orderId);
+		System.out.println(productName);
+		System.out.println(contactPerson);
 		order.setQuantity(Integer.valueOf(quantity));
 		order.setTotalPrice(totalPrice);
+		System.out.println(deliveryAddress);
 		orderRepository.save(order);
 		return "ok";
 	}
