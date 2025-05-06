@@ -169,7 +169,7 @@ public class WeatherService {
 //		Alert alert = restClient.get().uri("/alerts/active/area/{state}", state).retrieve().body(Alert.class);
 		Order order = new Order();
 		order.setOrderId(orderId);
-		order.setId(Integer.valueOf(UUID.randomUUID().toString()));
+		order.setId(100 + (int)(Math.random() * 900));
 		order.setProductName(productName);
 		order.setUnitPrice(unitPrice);
 		order.setContactPerson(contactPerson);
