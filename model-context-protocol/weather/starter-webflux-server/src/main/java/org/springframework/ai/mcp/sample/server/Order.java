@@ -1,8 +1,12 @@
 package org.springframework.ai.mcp.sample.server;
 
-import java.math.BigDecimal;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
+import java.math.BigDecimal;
+@Entity
 public class Order {
+    @Id
     private Integer id;
     private String orderId;
     private String productName;
