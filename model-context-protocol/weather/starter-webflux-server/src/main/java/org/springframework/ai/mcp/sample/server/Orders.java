@@ -1,20 +1,19 @@
 package org.springframework.ai.mcp.sample.server;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import javax.xml.transform.Result;
 import java.math.BigDecimal;
-@Entity
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String orderId;
-    private String productName;
-    private BigDecimal unitPrice;
-    private Integer quantity;
+    private List<OrderDetails> details;
     private BigDecimal totalPrice;
     private String deliveryAddress;
     private String contactPerson;
@@ -27,13 +26,18 @@ public class Orders {
     // 全参构造方法
     public Orders(String orderId, String productName, BigDecimal unitPrice, Integer quantity, BigDecimal totalPrice, String deliveryAddress, String contactPerson, String contactPhone) {
         this.orderId = orderId;
-        this.productName = productName;
-        this.unitPrice = unitPrice;
-        this.quantity = quantity;
         this.totalPrice = totalPrice;
         this.deliveryAddress = deliveryAddress;
         this.contactPerson = contactPerson;
         this.contactPhone = contactPhone;
+    }
+
+    public void setDetails(List<OrderDetails> details) {
+        this.details = details;
+    }
+
+    public List<OrderDetails> getDetails() {
+        return details;
     }
 
     // Getter 和 Setter 方法
@@ -53,29 +57,6 @@ public class Orders {
         this.orderId = orderId;
     }
 
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
 
     public BigDecimal getTotalPrice() {
         return totalPrice;
@@ -109,14 +90,12 @@ public class Orders {
         this.contactPhone = contactPhone;
     }
 
+
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +
                 ", orderId='" + orderId + '\'' +
-                ", productName='" + productName + '\'' +
-                ", unitPrice=" + unitPrice +
-                ", quantity=" + quantity +
                 ", totalPrice=" + totalPrice +
                 ", deliveryAddress='" + deliveryAddress + '\'' +
                 ", contactPerson='" + contactPerson + '\'' +
