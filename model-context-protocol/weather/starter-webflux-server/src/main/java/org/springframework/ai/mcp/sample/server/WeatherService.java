@@ -15,6 +15,7 @@
 */
 package org.springframework.ai.mcp.sample.server;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -143,8 +144,10 @@ public class WeatherService {
 
 	@Resource
 	private MenuRepository menuRepository;
+	@Resource
+	private OrderRepository orderRepository;
 
-	@Tool(description = "INSERT menu some food likes(potato,tomato)")
+	@Tool(description = "只是新增菜品的，不是点单菜品")
 	public String addFood(@ToolParam( description =  "food_cost_price") String food_cost_price, @ToolParam(description = "foodName") String foodName,
 						  @ToolParam(description = "foodPrice") String foodPrice, @ToolParam(description = "foodNum") String foodNum) {
 //		Alert alert = restClient.get().uri("/alerts/active/area/{state}", state).retrieve().body(Alert.class);
@@ -158,6 +161,23 @@ public class WeatherService {
 		menu.setCost_price(food_cost_price);
 		System.out.println(menu);
 		menuRepository.save(menu);
+		return "ok";
+	}
+	@Tool(description = "存储订单信息")
+	public String addOrderDetail(@ToolParam( description =  "orderId") String orderId, @ToolParam(description = "productName") String productName,
+						  @ToolParam(description = "unitPrice") BigDecimal unitPrice, @ToolParam(description = "quantity") String quantity, @ToolParam(description = "totalPrice") BigDecimal totalPrice, @ToolParam(description = "deliveryAddress") String deliveryAddress, @ToolParam(description = "contactPerson") String contactPerson, @ToolParam(description = "contactPhone") String contactPhone) {
+//		Alert alert = restClient.get().uri("/alerts/active/area/{state}", state).retrieve().body(Alert.class);
+		Order order = new Order();
+		order.setOrderId(orderId);
+		order.setId(Integer.valueOf(UUID.randomUUID().toString()));
+		order.setProductName(productName);
+		order.setUnitPrice(unitPrice);
+		order.setContactPerson(contactPerson);
+		order.setContactPhone(contactPhone);
+		order.setDeliveryAddress(deliveryAddress);
+		order.setQuantity(Integer.valueOf(quantity));
+		order.setTotalPrice(totalPrice);
+		orderRepository.save(order);
 		return "ok";
 	}
 
