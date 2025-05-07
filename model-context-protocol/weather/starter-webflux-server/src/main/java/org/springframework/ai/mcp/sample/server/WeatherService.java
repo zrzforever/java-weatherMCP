@@ -24,18 +24,20 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mysql.cj.xdevapi.JsonArray;
 import jakarta.annotation.Resource;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.ai.mcp.sample.server.dao.OrderDetailsMapper;
+import org.springframework.ai.mcp.sample.server.dao.OrderInfoMapper;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 
+@Slf4j
 @Service
 public class WeatherService {
 
@@ -147,6 +149,11 @@ public class WeatherService {
 
 	@Resource
 	private MenuRepository menuRepository;
+
+	@Autowired
+	private OrderInfoMapper orderInfoMapper;
+	@Autowired
+	private OrderDetailsMapper orderDetailsMapper;
 //	@Resource
 //	private OrderRepository orderRepository;
 
@@ -166,47 +173,52 @@ public class WeatherService {
 		menuRepository.save(menu);
 		return "ok";
 	}
+
 	@Tool(description = "存储订单信息")
-	public String addOrderDetail(@ToolParam( description =  "orderId") String orderId,@ToolParam(description = "contactPerson") String contactPerson, @ToolParam(description = "deliveryAddress") String deliveryAddress,  @ToolParam(description = "contactPhone") String contactPhone,@ToolParam(description = "订单详情，包含的字段有productName，unitPrice，quantity") List<OrderDetails> details,
-						  @ToolParam(description = "totalPrice") BigDecimal totalPrice) {
+	public String addOrderDetail(@ToolParam( description =  "orderId") String orderId,@ToolParam(description = "contactPerson") String contactPerson, @ToolParam(description = "deliveryAddress") String deliveryAddress,
+								 @ToolParam(description = "contactPhone") String contactPhone,@ToolParam(description = "订单详情，包含的字段有productName，unitPrice，quantity") List<Map<String,Object>> details,
+						  @ToolParam(description = "totalAmount") BigDecimal totalAmount) {
 		System.out.println(details);
-		Orders order = new Orders();
-		try {
-			ObjectMapper objectMapper = new ObjectMapper();
-			String json = objectMapper.writeValueAsString(details);
-			order.setDetails(objectMapper.readValue(json, new TypeReference<List<OrderDetails>>() {}));
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new IllegalArgumentException("Failed to convert details to OrderDetails list", e);
+		List<OrderInfo> orderInfos =  orderInfoMapper.selectUserById(1);
+		System.out.println(orderInfos);
+		OrderInfo orderInfo = new OrderInfo();
+		orderInfo.setOrderId(orderId);
+		orderInfo.setContactPerson(contactPerson);
+		orderInfo.setDeliveryAddress(deliveryAddress);
+		orderInfo.setContactPhone(contactPhone);
+		orderInfo.setTotalAmount(totalAmount);
+		orderInfoMapper.insertUser(orderInfo);
+		log.info("1;{}",orderInfo.toString());
+		log.info("1.2;{}",details.toString());
+		log.info("orderID:{}",orderId);
+		for (Map<String, Object> detail : details) {
+			OrderDetails orderDetails = new OrderDetails();
+			orderDetails.setOrderId(orderId);
+			orderDetails.setProductName((String) detail.get("productName"));
+			log.info("1.3:{}",orderDetails.getDetailId());
+			log.info("1.4:{}",orderDetails.getProductName());
+
+			log.info("2;{}",orderDetails.getUnitPrice());
+			log.info("2.1;{}", detail.get("unitPrice"));
+			Object unitPriceObj = detail.get("unitPrice");
+
+			if (unitPriceObj instanceof String) {
+				orderDetails.setUnitPrice(new BigDecimal((String) unitPriceObj));
+			} else if (unitPriceObj instanceof Integer) {
+				orderDetails.setUnitPrice(BigDecimal.valueOf((Integer) unitPriceObj));
+			} else if (unitPriceObj instanceof Long) {
+				orderDetails.setUnitPrice(BigDecimal.valueOf((Long) unitPriceObj));
+			} else if (unitPriceObj instanceof Double) {
+				orderDetails.setUnitPrice(BigDecimal.valueOf((Double) unitPriceObj));
+			} else {
+				throw new IllegalArgumentException("Unexpected type for unitPrice: " + unitPriceObj.getClass());
+			}
+
+			log.info("2.2;{}", orderDetails.getUnitPrice());
+			orderDetails.setQuantity((Integer) detail.get("quantity"));
+			log.info("3:{}",orderDetails.toString());
+			orderDetailsMapper.insertOrderDetails(orderDetails);
 		}
-
-		System.out.println(details.get(0).getQuantity());
-		System.out.println(details.get(0).getProductName());
-		System.out.println(details.get(0).getUnitPrice());
-		System.out.println(details.get(1).getUnitPrice());
-		System.out.println(details.get(1).getUnitPrice());
-		System.out.println(details.get(1).getUnitPrice());
-		System.out.println(details.get(2).getUnitPrice());
-		System.out.println(details.get(2).getUnitPrice());
-		System.out.println(details.get(2).getUnitPrice());
-//		Alert alert = restClient.get().uri("/alerts/active/area/{state}", state).retrieve().body(Alert.class);
-
-		order.setOrderId(orderId);
-		order.setId(100 + (int)(Math.random() * 900));
-//		order.setProductName(productName);
-//		order.setUnitPrice(unitPrice);
-		order.setContactPerson(contactPerson);
-		order.setContactPhone(contactPhone);
-		order.setDeliveryAddress(deliveryAddress);
-		order.setDetails(details);
-//		System.out.println(orderId);
-//		System.out.println(productName);
-//		System.out.println(contactPerson);
-//		order.setQuantity(Integer.valueOf(quantity));
-		order.setTotalPrice(totalPrice);
-
-//		System.out.println(deliveryAddress);
-//		orderRepository.save(order);
 		return "ok";
 	}
 
